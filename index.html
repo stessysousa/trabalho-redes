@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socket Cliente</title>
+    <link href="estilo.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        export default {
+    name: "Arquivos",
+    data() {
+        id: 0;
+        arquivos: [],
+        arquivos: {},
+        var socket = io("www.google.com");
+        baseURI: "http://localhost:8080/api/arquivos",
+    
+  },
+  
+  methods: {
+    socket.on('connect', function(){
+            //usar get
+    });
+
+    socket.on('get', function(data){
+        getArquivos: function() {
+        this.$http.get(this.baseURI).then((result) => {
+        this.arquivos = result.data;
+            });
+        },
+    });
+
+    socket.on('send', function(data){
+            //pegar o arquivo do input 
+            //eo.send (enviar aqui)
+        });
+
+    socket.on('disconnect', function(){
+            //alert opcional 
+        });    
+  },
+};
+</script>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="socketCliente">Socket Cliente</div>
+        <div class="adicionarArquivo">
+            <div class="selecioneArquivo">Selecione um arquivo:</div>
+            <label style="height: 40px;" for="arquivo">
+                <input
+                 name="arquivo" type="file" placeholder="Arquivo.png">
+            </label>
+            <button class="botao" type="button">Upload</button>
+        </div>
+
+        <div class="arquivoServidor">
+            <div class="linha">
+            <div class="arquivoServidorTitulo">Arquivos do Servidor:
+                
+            </div>
+            <button class="botao" type="button" @click="getArquivos()">Recarregar</button>
+            </div>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <td>Listar arquivos</td>
+                    </tr>
+                </thead>
+
+                <tbody> 
+                    
+                    <tr v-for="arquivo in arquivos" v-bind:key="arquivo.id">
+                        <td>Arquivo: {{ arquivo }}</td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+
+</html>
